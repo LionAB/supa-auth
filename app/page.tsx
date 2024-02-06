@@ -5,6 +5,7 @@ import ConnectSupabaseSteps from "@/components/ConnectSupabaseSteps";
 import SignUpUserSteps from "@/components/SignUpUserSteps";
 import Header from "@/components/Header";
 import { cookies } from "next/headers";
+import Dashboard from "@/components/Dashboard";
 
 export default async function Index() {
   const cookieStore = cookies();
@@ -19,6 +20,22 @@ export default async function Index() {
       return false;
     }
   };
+  
+  const isUserConnected =()=>{
+    try{
+      const supabase = createClient(cookieStore);
+      const { data:{ user} } = supabase.auth.getUser();
+      console.log(user);
+      if (user){
+        return true;
+      }else{
+        return false;
+      }
+    }catch(e){
+      return false;
+    }
+  };
+  const isUserLoggedIn = isUserConnected();
 
   const isSupabaseConnected = canInitSupabaseClient();
 
@@ -35,7 +52,8 @@ export default async function Index() {
         <Header />
         <main className="flex-1 flex flex-col gap-6">
           <h2 className="font-bold text-4xl mb-4">Next steps</h2>
-          {isSupabaseConnected ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
+         {/*  {isSupabaseConnected ? <SignUpUserSteps/> : <ConnectSupabaseSteps />} */}
+          {isUserLoggedIn ? <p>Veuillez vous conneter</p>: <Dashboard />}
         </main>
       </div>
 
