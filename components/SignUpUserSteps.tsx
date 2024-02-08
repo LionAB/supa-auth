@@ -52,8 +52,22 @@ export default function Page() {
 
 export default function SignUpUserSteps() {
   return (
+    //
     <ol className="flex flex-col gap-6">
-      <Step title="Sign up your first user">
+      <h2 className="font-bold text-4xl mb-4 text-green-500"> Supabase Connecté ✔ </h2>
+      <Step title="Connect to Supabase">
+        
+          Vous devez vous logger
+          <Link
+      href="/login"
+      className="py-2 px-3 flex rounded-md no-underline bg-btn-background hover:bg-btn-background-hover w-16"
+    >
+      Login
+    </Link>
+          . Une fois logger vous aurrez acces au fonctionnalité de l'appli
+        
+        </Step>
+    {/*   <Step title="Sign up your first user">
         <p>
           Head over to the{" "}
           <Link
@@ -110,7 +124,7 @@ export default function SignUpUserSteps() {
 
       <Step title="Build in a weekend and scale to millions!">
         <p>You're ready to launch your product to the world! 🚀</p>
-      </Step>
+      </Step> */}
     </ol>
   );
 }
